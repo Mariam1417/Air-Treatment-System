@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioAir Purification | Configuration</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">BioAir Purification</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="mechanism.html">Mechanism</a></li>
+                <li><a href="configuration.html" class="active">Configuration</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="config-intro">
+            <h1>System Configuration</h1>
+            <p>Use this tool to estimate the treatment efficiency and time required for your specific H₂S concentration levels.</p>
+        </section>
+
+        <section class="config-form">
+            <div class="form-container">
+                <div class="input-group">
+                    <label for="initial-concentration">Initial H₂S Concentration (ppm):</label>
+                    <input type="number" id="initial-concentration" min="0" step="1" placeholder="e.g., 450">
+                </div>
+
+                <button id="calculate-btn" class="cta-button">Calculate Treatment Parameters</button>
+
+                <div id="results" class="hidden">
+                    <div class="result-item">
+                        <span class="result-label">Estimated Treatment Time:</span>
+                        <span id="treatment-time" class="result-value">--</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Expected Efficiency:</span>
+                        <span id="efficiency" class="result-value">--</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Start Measuring After:</span>
+                        <span id="measure-time" class="result-value">--</span>
+                    </div>
+
+                    <div class="final-measurement hidden" id="final-measurement">
+                        <div class="input-group">
+                            <label for="final-concentration">Final H₂S Concentration (ppm):</label>
+                            <input type="number" id="final-concentration" min="0" step="1">
+                        </div>
+                        <button id="check-btn" class="cta-button">Check Results</button>
+                    </div>
+                </div>
+
+                <div id="success-message" class="message hidden success">
+                    <h3>Congratulations!</h3>
+                    <p>Your air treatment was successful with an efficiency of <span id="actual-efficiency">--</span>%.</p>
+                    <p>This meets our target of 20% minimum reduction.</p>
+                </div>
+
+                <div id="fail-message" class="message hidden fail">
+                    <h3>Treatment Incomplete</h3>
+                    <p>Your achieved efficiency was <span id="failed-efficiency">--</span>%.</p>
+                    <p>Please check your system and try again. Consider:</p>
+                    <ul>
+                        <li>Extending treatment time</li>
+                        <li>Checking bacterial health</li>
+                        <li>Ensuring proper airflow</li>
+                    </ul>
+                    <button id="try-again-btn" class="cta-button">Try Again</button>
+                </div>
+            </div>
+
+            <div class="formula-info">
+                <h3>Calculation Method</h3>
+                <p>Our calculations are based on experimental data showing:</p>
+                <p class="formula">Efficiency = (Initial ppm - Final ppm) / Initial ppm × 100%</p>
+                <p>Average efficiency across trials: 68.2% ±2.2%</p>
+                <p>Treatment time is estimated at 10 minutes per 1000mL volume</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 BioAir Purification Project. Ismailia STEM High School.</p>
+    </footer>
+
+    <script>
+        document.getElementById('calculate-btn').addEventListener('click', function() {
+            const initialPpm = parseFloat(document.getElementById('initial-concentration').value);
+            
+            if (initialPpm && initialPpm > 0) {
+                // Show results section
+                document.getElementById('results').classList.remove('hidden');
+                
+                // Calculate values (based on experimental data)
+                const efficiency = 68.2; // Average from experiments
+                const treatmentTime = 10; // Minutes (from experiments)
+                
+                // Update results
+                document.getElementById('treatment-time').textContent = treatmentTime + ' minutes';
+                document.getElementById('efficiency').textContent = efficiency.toFixed(1) + '%';
+                document.getElementById('measure-time').textContent = treatmentTime + ' minutes after start';
+                
+                // Show final measurement input
+                document.getElementById('final-measurement').classList.remove('hidden');
+                
+                // Hide any previous messages
+                document.getElementById('success-message').classList.add('hidden');
+                document.getElementById('fail-message').classList.add('hidden');
+            } else {
+                alert('Please enter a valid initial concentration value');
+            }
+        });
+        
+        document.getElementById('check-btn').addEventListener('click', function() {
+            const initialPpm = parseFloat(document.getElementById('initial-concentration').value);
+            const finalPpm = parseFloat(document.getElementById('final-concentration').value);
+            
+            if (finalPpm && finalPpm >= 0 && finalPpm < initialPpm) {
+                const efficiency = ((initialPpm - finalPpm) / initialPpm) * 100;
+                
+                if (efficiency >= 20) { // Success if meets minimum 20% reduction
+                    document.getElementById('actual-efficiency').textContent = efficiency.toFixed(1);
+                    document.getElementById('success-message').classList.remove('hidden');
+                    document.getElementById('fail-message').classList.add('hidden');
+                } else {
+                    document.getElementById('failed-efficiency').textContent = efficiency.toFixed(1);
+                    document.getElementById('fail-message').classList.remove('hidden');
+                    document.getElementById('success-message').classList.add('hidden');
+                }
+            } else {
+                alert('Please enter a valid final concentration that is less than the initial concentration');
+            }
+        });
+        
+        document.getElementById('try-again-btn').addEventListener('click', function() {
+            document.getElementById('final-concentration').value = '';
+            document.getElementById('fail-message').classList.add('hidden');
+        });
+    </script>
+</body>
+</html>

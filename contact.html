@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioAir Purification | Contact</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">BioAir Purification</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="mechanism.html">Mechanism</a></li>
+                <li><a href="configuration.html">Configuration</a></li>
+                <li><a href="contact.html" class="active">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="contact-intro">
+            <h1>Get In Touch</h1>
+            <p>We'd love to hear from you! Contact our team for more information about our biofilter technology or potential collaborations.</p>
+        </section>
+
+        <section class="contact-methods">
+            <div class="contact-card">
+                <div class="contact-icon">✉️</div>
+                <h3>Email Us</h3>
+                <div class="contact-details">
+                    <p><strong>Jana Alaa:</strong> <a href="mailto:Jana.1723527@stemismailia.moe.edu.eg">Jana.1723527@stemismailia.moe.edu.eg</a></p>
+                    <p><strong>Mariam Abdelmonem:</strong> <a href="mailto:Mariam.1723541@stemismailia.moe.edu.eg">Mariam.1723541@stemismailia.moe.edu.eg</a></p>
+                    <p><strong>Hoda Mostafa:</strong> <a href="mailto:Hoda.1723525@stemismailia.moe.edu.eg">Hoda.1723525@stemismailia.moe.edu.eg</a></p>
+                    <p><strong>Hana Ahmed:</strong> <a href="mailto:Hana.1723518@stemismailia.moe.edu.eg">Hana.1723518@stemismailia.moe.edu.eg</a></p>
+                    <p><strong>A'laa TAmer:</strong> <a href="mailto:Alaa.1723504@stemismailia.moe.edu.eg ">Alaa.1723504@stemismailia.moe.edu.eg </a></p>
+                </div>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">🏫</div>
+                <h3>Our Institution</h3>
+                <div class="contact-details">
+                    <p>Ismailia STEM High School</p>
+                    <p>IEEE EUI</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact-form">
+            <h2>Send Us a Message</h2>
+            <form id="message-form">
+                <div class="form-group">
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="cta-button">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 BioAir Purification Project. Ismailia STEM High School.</p>
+    </footer>
+
+    <script>
+        document.getElementById('message-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
